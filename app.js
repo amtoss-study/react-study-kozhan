@@ -45,7 +45,7 @@ const TableRender = ({usersData})=>
 
 const FormForUSer =({onSubmitFunc})=>
 {
-    const[newUser,setNewValues] = React.useState(
+    const[newUser,setNewUserValues] = React.useState(
     {
         userName:"",
         userAge:0,
@@ -59,23 +59,24 @@ const FormForUSer =({onSubmitFunc})=>
                 }
             }
         >
-            <input placeholder='User Name' onChange={event => newUser.userName = event.target.value }/>
-            <input placeholder='User Age Name' type = "number" onChange={event => newUser.userAge = event.target.value }/>
-            <input placeholder='User Phone' onChange={event => newUser.userPhone = event.target.value }/>
+            <input placeholder='User Name' value={newUser.userName} onChange={event => setNewUserValues({...newUser, userName: event.target.value}) }/>
+            <input placeholder='User Age Name' value={newUser.userAge} onChange={event => setNewUserValues({...newUser, userAge: event.target.value}) }/>
+            <input placeholder='User Phone' value={newUser.userPhone} onChange={event => setNewUserValues({...newUser, userPhone: event.target.value})}/>
+
             <button type="submit">Send new Values</button>
         </form>
     );    
 }
 
 const App = () => {
-    const [users,invokeReload] = React.useState(usersList);
+    const [users,setUser] = React.useState(usersList);
     return(
         <div>
             <h3>Home Task no.1</h3>
             <TableRender usersData = {users}/>
             <h3>You can create new User!</h3>
             <FormForUSer onSubmitFunc = {
-                newUser => invokeReload([...users, newUser])
+                newUser => setUser([...users, newUser])
                 }/>
         </div> 
     );   
