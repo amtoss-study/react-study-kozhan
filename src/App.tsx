@@ -1,14 +1,12 @@
 import React from "react";
-import { User } from "types";
-import TableRender from "./Components/TableRender";
-import FormForUser from "./Components/FormForUser";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./routes/Home";
 import Nav from "./Components/Nav";
 import AllUsers from "routes/AllUsers";
 import CreateUser from "routes/CreateUser";
+import UsersContext, { UsersContextProvider }  from "UsersContext";
 
-const usersList = [
+/*const usersList = [
   {
     id: 0,
     userName: "Tor",
@@ -21,25 +19,22 @@ const usersList = [
     userAge: 6786,
     userPhone: "0959223367",
   },
-];
+];*/
 
 const App = () => {
-  const [users, setUser] = React.useState<User[]>(usersList);
   return (
-    <Router>
-      <Nav />
-      <Switch>
-        <Route path="/allUsers" exact={true}>
-          <AllUsers users={users} setUser={setUser} />
-        </Route>
-        <Route path="/createUser" exact={true}>      
-          <CreateUser users={users} setUser={setUser}/>
-        </Route>
-        <Route path="/">
-          <Home users = {users} />
-        </Route>
-      </Switch>
-    </Router>
+    <UsersContextProvider>{/*==> <UsersContext.Provider value = {{users, setUsers}}> ==> const [users, setUsers] = React.useState<User[]>([]); */}
+      <Router>
+        <Nav />
+        <Switch>            
+          <Route path="/allUsers" exact={true} component={AllUsers} />{/* AllUsers use UsersContext.Provider for receiving properties with data*/}
+          <Route path="/createUser" exact={true}>
+            <CreateUser users={UsersContext.Provider.arguments.users} setUsers={UsersContext.Provider.arguments.setUsers}/>{/* CreateUser gets properties throught params and doesn't use UsersContext.Provider*/}  
+          </Route>
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
+    </UsersContextProvider>
   );
 };
 

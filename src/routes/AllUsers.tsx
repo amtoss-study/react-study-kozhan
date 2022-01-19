@@ -1,20 +1,15 @@
 import TableRender from "Components/TableRender";
 import React from "react";
-import { User } from "types";
+import useUsers from "Hooks/useUsers";
 
-type Props = {
-    users: User[];
-    setUser: (users: User[]) => void;
-}
-
-const AllUsers = ({ users, setUser}: Props) =>
+const AllUsers = () =>
 {
+    const {users, setUsers} = useUsers(); {/* useUsers() == React.useContext(UsersContext);*/}
     return(
             <>
                 <h3>Home Task #3</h3>
                 <TableRender users={users} onRemove={function (id: number) {
-                    return setUser(users.filter((user) => user.id != id)); }
-                                                    }
+                    return setUsers(users.filter((user) => user.id != id)); }}
                 />
             </>
     )

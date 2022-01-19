@@ -1,10 +1,11 @@
 import Greeting from "Components/Greeting";
+import useUsers from "Hooks/useUsers";
 import React from "react";
-import { User } from "types";
 
-const Home = ({ users } : {users : User[] }) =>
+const Home = () =>
 {
-    const lastAddedUser = users[users.length - 1];
+    const {users} = useUsers();
+    const lastAddedUser = users[users?.length - 1];
     return < Greeting name = {lastAddedUser?.userName} />
 };
 
