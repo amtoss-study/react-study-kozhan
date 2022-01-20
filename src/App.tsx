@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./routes/Home";
 import Nav from "./Components/Nav";
-import AllUsers from "routes/AllUsers";
+import AllUsers from "routes/AllUsers/AllUsers";
 import CreateUser from "routes/CreateUser";
 import UsersContext, { UsersContextProvider }  from "UsersContext";
 
@@ -28,9 +28,8 @@ const App = () => {
         <Nav />
         <Switch>            
           <Route path="/allUsers" exact={true} component={AllUsers} />{/* AllUsers use UsersContext.Provider for receiving properties with data*/}
-          <Route path="/createUser" exact={true}>
-            <CreateUser users={UsersContext.Provider.arguments.users} setUsers={UsersContext.Provider.arguments.setUsers}/>{/* CreateUser gets properties throught params and doesn't use UsersContext.Provider*/}  
-          </Route>
+          <Route path="/createUser" exact={true} component={CreateUser} />
+            {/*<CreateUser users={UsersContext.Provider.arguments.users} setUsers={UsersContext.Provider.arguments.setUsers}/>{/* CreateUser gets properties throught params and doesn't use UsersContext.Provider / /  */}
           <Route path="/" component={Home} />
         </Switch>
       </Router>
