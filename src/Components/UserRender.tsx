@@ -1,9 +1,11 @@
 import { User } from "../types";
+import { Link } from "react-router-dom";
+
 
 const UserRender = ({  userData,  onRemove,}: {  userData: User;  onRemove: (id: number) => void;}) => 
 (
   <tr>
-    <td>{userData.userName}</td>
+    <td><Link to = {`/allUsers/${userData.id}`}>{userData.userName}</Link></td>
     <td>{userData.userAge}</td>
     <td>{userData.userPhone}</td>
     <td>

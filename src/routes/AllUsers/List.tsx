@@ -2,7 +2,7 @@ import TableRender from "Components/TableRender";
 import React from "react";
 import useUsers from "Hooks/useUsers";
 
-const AllUsers = () =>
+const List = () =>
 {
     const {users, removeUser} = useUsers(); {/* useUsers() == React.useContext(UsersContext);*/}
     return(
@@ -13,4 +13,6 @@ const AllUsers = () =>
     )
 }
 
-export default AllUsers;
+export default List;
+
+

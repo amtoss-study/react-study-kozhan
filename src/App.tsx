@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./routes/Home";
 import Nav from "./Components/Nav";
-import AllUsers from "routes/AllUsers/AllUsers";
 import CreateUser from "routes/CreateUser";
 import UsersContext, { UsersContextProvider }  from "UsersContext";
+import AllUsers from "routes/AllUsers";
 
 /*const usersList = [
   {
@@ -23,13 +23,12 @@ import UsersContext, { UsersContextProvider }  from "UsersContext";
 
 const App = () => {
   return (
-    <UsersContextProvider>{/*==> <UsersContext.Provider value = {{users, setUsers}}> ==> const [users, setUsers] = React.useState<User[]>([]); */}
+    <UsersContextProvider>
       <Router>
         <Nav />
         <Switch>            
-          <Route path="/allUsers" exact={true} component={AllUsers} />{/* AllUsers use UsersContext.Provider for receiving properties with data*/}
+          <Route path="/allUsers" exact={true} component={AllUsers} />
           <Route path="/createUser" exact={true} component={CreateUser} />
-            {/*<CreateUser users={UsersContext.Provider.arguments.users} setUsers={UsersContext.Provider.arguments.setUsers}/>{/* CreateUser gets properties throught params and doesn't use UsersContext.Provider / /  */}
           <Route path="/" component={Home} />
         </Switch>
       </Router>
